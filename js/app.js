@@ -1,17 +1,54 @@
 //Selectores para las 3 partes del proyecto
 const container = document.querySelector('.container');
-const resultado = document.addEventListener('#resultado');
-const formulario = document.addEventListener('#formulario');
+const resultado = document.querySelector('#resultado');
+const formulario = document.querySelector('#formulario');
 
 //cargamos la ventana
 window.addEventListener('load', () =>{
     formulario.addEventListener('submit', buscarClima);
-})
+});
 
 function buscarClima(e){
-    e.prevent.default();
+    e.preventDefault();
 
     //Validar
+    const ciudad = document.querySelector('#ciudad').value;
+    const pais = document.querySelector('#pais').value;
+
+    if(ciudad === '' || pais === ''){
+        //Hubo un error
+        mostrarError('Ambos campos son obligatorios');
+        return;
+    }
+
 
     //Consultar la API
 }
+    function mostrarError(mensaje){
+        const alerta = document.querySelector('.bg-red-100');
+
+        if(!alerta){
+            //Crear alerta
+        const alerta = document.createElement('div');
+
+        alerta.classList.add('bg-red-100', 'border-red-400' , 'text-red-700' , 'px-4' , 'py-3' , 'rounded' , 'max-w-md' ,
+        'mx-auto' , 'mt-6' , 'text-center');
+
+        //Scripting
+        alerta.innerHTML = `
+            <strong class = "font-bold">Error!</strong>
+            <span class = "block">${mensaje}</span>
+        `;
+
+        container.appendChild(alerta);
+
+        //Eliminar la alerta
+        setTimeout( () =>{
+            alerta.remove();
+        },5000);
+
+        }
+
+        
+
+    }
